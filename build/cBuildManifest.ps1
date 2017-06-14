@@ -8,7 +8,7 @@ $ErrorActionPreference = 'Continue'
 Set-Location $PSScriptRoot
 
 #Query the name of the folder one level up
-[string]$ModuleName = ((Get-ChildItem ..\).Directory | Select-Object -First 1).name
+[string]$ModuleName = (Get-ChildItem ..\ ).psparentpath[-1].split('\')[-1]
 
 #Summarize all functions found within the ModuleFile
 function Get-ModuleFunctions {
