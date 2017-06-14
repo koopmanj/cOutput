@@ -38,7 +38,7 @@ if ($null -eq $ModuleFile) {
     exit 1
 }
 else {
-    Write-Verbose -Message "$env:COMPUTERNAME : Files to include for Manifest (psd1) : `n$($ModuleFile.name|Out-String) "
+    Write-Verbose -Message "$env:COMPUTERNAME : File to include for Manifest (psd1) : $($ModuleFile.name|Out-String) "
 }
 
 if ($null -eq $ModuleFunctions) {
@@ -46,12 +46,12 @@ if ($null -eq $ModuleFunctions) {
     exit 1
 }
 else {
-    Write-Verbose -Message "$env:COMPUTERNAME : Functions to include for Manifest (psd1) : `n$($ModuleFunctions|Out-String) "
+    Write-Verbose -Message "$env:COMPUTERNAME : Functions to include for Manifest (psd1) : $($ModuleFunctions|Out-String) "
 }
         
 #Get all content, filter on ModuleVersion, replace non-relevant characters
 if (Test-Path ..\$ModuleName\$ModuleName.psd1) {
-    Write-Verbose -Message "$env:COMPUTERNAME : Manifest found, rendering a new manifest(psd1) build number  : `n$($TrimmedFunctionNames|Out-String) "
+    Write-Verbose -Message "$env:COMPUTERNAME : Manifest found, rendering a new manifest(psd1) build number"
     $ManifestContent = Get-Content ..\$ModuleName\$ModuleName.psd1
     $ModuleManifestVersion = $ManifestContent | Select-String -Pattern 'ModuleVersion'
     [version]$ModuleManifestVersionNumber = $ModuleManifestVersion -ireplace "[A-Za-z =']", ''
@@ -84,7 +84,7 @@ try {
     .\cBuildMarkdown.ps1
 }
 catch {
-    Write-Error -Message "$env:COMPUTERNAME : Failed to render a manifest"
+    Write-Error -Message "$env:COMPUTERNAME : Failed to render a markdown"
     exit 1
 }
 
