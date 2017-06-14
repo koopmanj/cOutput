@@ -1,14 +1,19 @@
+$VerbosePreference = 'Continue'
+
 Write-Verbose "Importing functions from $PSScriptRoot" -Verbose
 
 $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
+
 $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
 
 foreach($import in @($Public + $Private))
 {
+    Write-Verbose -Message "Function $($import.fullname) attempting to import." -Verbose
+
     try
     {
         . $import.fullname
-        Write-Verbose "Function $($import.fullname) has been loaded." -Verbose
+        Write-Verbose -Message "Function $($import.fullname) has been loaded." -Verbose
     }
     catch
     {
@@ -16,4 +21,4 @@ foreach($import in @($Public + $Private))
     }
 }
 
-Export-ModuleMember -Function $Public.Basename
+Export-ModuleMember -Function $Public.Basename -Verbose
