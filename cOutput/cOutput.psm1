@@ -1,5 +1,3 @@
-# File: cManagementTools.psm1
-
 Write-Verbose "Importing functions from $PSScriptRoot" -Verbose
 
 $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
