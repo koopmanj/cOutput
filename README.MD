@@ -23,7 +23,7 @@ The installation of this module can be achieved by registering a Solvinity NuGet
 ### Detailed information about the functions###
 ---
 
-### Detailed information about the functions###
+### Detailed folder structure###
 +---build
 +---cOutput
 |   +---Private

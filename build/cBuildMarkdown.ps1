@@ -14,7 +14,7 @@ Write-Verbose -Message "$env:COMPUTERNAME : The name of the module is : $ModuleN
 #Query the name of the manifest
 [string]$ModuleManifest = (Get-ChildItem -Filter *.psd1 -Path ..\$ModuleName)
 Write-Verbose -Message "$env:COMPUTERNAME : The location of the module is : $ModuleManifest"
-Write-Verbose -Message "$env:COMPUTERNAME : The path used for searching is $(..\$ModuleName\$ModuleManifest|out-string)"
+#Write-Verbose -Message "$env:COMPUTERNAME : The path used for searching is $(..\$ModuleName\$ModuleManifest|out-string)"
 
 
 
