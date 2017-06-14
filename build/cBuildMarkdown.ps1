@@ -7,7 +7,7 @@ $ErrorActionPreference = 'Continue'
 #Set script location
 Set-Location $PSScriptRoot
 
-Write-Output -Message "`n`n"
+Write-Output "`n`n"
 Write-Information -MessageData "$env:COMPUTERNAME : Build of markdown started" -InformationAction Continue
 
 #Query the name of the folder one level up
@@ -63,7 +63,7 @@ foreach ($Function in $PublicFunctions) {
     [string]$AllFunctions += "$($Function)`n"
 }
 
-Write-Verbose -Message "$env:COMPUTERNAME : The functions within this module exists of : `n$($PublicFunctions|out-string)"
+Write-Verbose -Message "$env:COMPUTERNAME : The functions within this module exists of : $($PublicFunctions|out-string)"
 #$PublicFunctions
 #$PublicFunctions.GetType()
 
