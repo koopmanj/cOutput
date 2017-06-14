@@ -28,6 +28,8 @@ function Get-ModuleFunctions {
     return $TrimmedFunctionNames
 }
 
+$ModuleFunctions = Get-ModuleFunctions -ModuleName $ModuleName
+
 #Query all files within the source path of the folder
 [array]$ModuleFile = (Get-ChildItem -Filter *.psm1 -Path ..\$ModuleName)
 
@@ -39,12 +41,12 @@ else {
     Write-Verbose -Message "$env:COMPUTERNAME : Files to include for Manifest (psd1) : `n$($ModuleFile.name|Out-String) "
 }
 
-if ($null -eq (Get-ModuleFunctions -ModuleName $ModuleName)) {
+if ($null -eq $ModuleFunctions) {
     Write-Warning -Message "$env:COMPUTERNAME : No functions found to include for Manifest (psd1)"
     exit 1
 }
 else {
-    Write-Verbose -Message "$env:COMPUTERNAME : Functions to include for Manifest (psd1) : `n$($TrimmedFunctionNames|Out-String) "
+    Write-Verbose -Message "$env:COMPUTERNAME : Functions to include for Manifest (psd1) : `n$($ModuleFunctions|Out-String) "
 }
         
 #Get all content, filter on ModuleVersion, replace non-relevant characters
