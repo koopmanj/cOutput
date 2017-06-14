@@ -7,6 +7,9 @@ $ErrorActionPreference = 'Continue'
 #Set script location
 Set-Location $PSScriptRoot
 
+Write-Output -Message "`n`n"
+Write-Information -MessageData "$env:COMPUTERNAME : Build of markdown started" -InformationAction Continue
+
 #Query the name of the folder one level up
 [string]$ModuleName = (Get-ChildItem ..\).psparentpath[-1].split('\')[-1]
 Write-Verbose -Message "$env:COMPUTERNAME : The name of the module is : $ModuleName"
