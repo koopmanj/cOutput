@@ -8,14 +8,18 @@ $ErrorActionPreference = 'Continue'
 Set-Location $PSScriptRoot
 
 #Query the name of the folder one level up
-[string]$ModuleName = ((Get-ChildItem ..\).Directory | Select-Object -First 1).name
+[string]$ModuleName = (Get-ChildItem ..\).psparentpath[-1].split('\')[-1]
 Write-Verbose -Message "$env:COMPUTERNAME : The name of the module is : $ModuleName"
 
 #Query the name of the manifest
 [string]$ModuleManifest = (Get-ChildItem -Filter *.psd1 -Path ..\$ModuleName)
+Write-Verbose -Message "$env:COMPUTERNAME : The location of the module is : $ModuleManifest"
+Write-Verbose -Message "$env:COMPUTERNAME : The path used for searching is $(..\$ModuleName\$ModuleManifest|out-string)"
+
+
 
 #Import the module
-Import-Module -Name $ModuleManifest
+Import-Module -Name ..\$ModuleName\$ModuleManifest
 
 #Summarize all functions found within the ModuleFile
 function Get-ModuleFunctions {
@@ -62,7 +66,7 @@ Write-Verbose -Message "$env:COMPUTERNAME : The functions within this module exi
 
 #Query for module structure
 $Tree = (tree (Split-Path -Path $PSScriptRoot) /A)
-$Tree = ($Tree[3..($null = $Tree.count)])
+$Tree = ($Tree[3..($null = $Tree.count)]|out-string)
 Write-Verbose -Message $Tree -Verbose
 #>
 
@@ -126,7 +130,7 @@ $ReadmeMarkDown3 = @"
 $ReadmeMarkDown   | Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Encoding ascii
 $FunctionSynopsis | Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Encoding ascii -Append
 $ReadmeMarkDown2  | Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Encoding ascii -Append
-$Tree             | Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Encoding ascii -Append
+($Tree|out-string)| Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Encoding ascii -Append
 $ReadmeMarkDown3  | Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Encoding ascii -Append
 
 
