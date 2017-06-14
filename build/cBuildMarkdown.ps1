@@ -116,7 +116,7 @@ The installation of this module can be achieved by registering a Solvinity NuGet
 "@
 
 $ReadmeMarkDown2 = @"
-### Detailed information about the functions###
+### Detailed folder structure###
 "@
 
 $ReadmeMarkDown3 = @"
