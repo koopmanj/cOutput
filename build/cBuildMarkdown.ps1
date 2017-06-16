@@ -22,7 +22,8 @@ Write-Verbose -Message "$env:COMPUTERNAME : The location of the module is : $Mod
 
 
 #Import the module
-Import-Module -Name ..\$ModuleName\$ModuleManifest
+Import-Module -Name ..\$ModuleName\$ModuleManifest -Verbose
+
 
 #Summarize all functions found within the ModuleFile
 function Get-ModuleFunctions {
@@ -31,29 +32,8 @@ function Get-ModuleFunctions {
         $ModuleName
     )
         
-    $PublicFunctions = Get-ChildItem -Path ..\$ModuleName\Public
-    $Functions = $PublicFunctions.ForEach( {
-            Get-Content -Path $_.fullname | Select-String -Pattern 'Function '
-        })
-
-    #Trim the output, so strip the function word,curly braces, and whitespaces
-    $TrimmedFunctionNames = $Functions -ireplace '(function)|\s|{', ''
-
+    $TrimmedFunctionNames = (Get-Command -Module $ModuleName).name
     return $TrimmedFunctionNames
-}
-
-function Get-ModuleFunctionSynopsis {
-    param(
-        [parameter(Mandatory = $true)]
-        $ModuleName
-    )
-        
-    $PublicFunctions = Get-ChildItem -Path ..\$ModuleName\Public
-    $Functions = $PublicFunctions.ForEach( {
-            Get-Content -Path $_.fullname
-        })
-
-    return $Functions
 }
 
 $AllFunctions = @()
@@ -136,14 +116,4 @@ $ReadmeMarkDown2  | Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Enc
 ($Tree|out-string)| Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Encoding ascii -Append
 $ReadmeMarkDown3  | Out-File "$(Split-Path $PSScriptRoot)\README.MD" -Force -Encoding ascii -Append
 
-
-
-
-#$ReadmeMarkDown | Out-File "$(Split-Path $fiets)\README.MD" -Force -Encoding ascii
-
-<#
-#### Parameters in the script ####
-**ComputerName**: Name of the computer being queried. Required.
-**Credential**: Credentials used to authenticate to remote machine.
-**DriveLetter**: Provide driveletter being queried @ remote machine.
-#>
+Remove-Module $ModuleName -Verbose
