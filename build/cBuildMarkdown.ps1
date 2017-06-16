@@ -90,7 +90,7 @@ $AllFunctions
 
 ### Installation ###
 The installation of this module can be achieved by registering a Solvinity NuGet repository:`n
-*register-psrepository -name solget -sourcelocation "http://solget-dev.web.solvinity.com/nuget" -publishLocation "http://solget-dev.web.solvinity.com/nuget" -installationPolicy trusted*`n
+*register-psrepository -name solget -sourcelocation "http://solget.web.solvinity.com/nuget" -publishLocation "http://solget.web.solvinity.com/nuget" -installationPolicy trusted*`n
 *find-module -name $ModuleName*`n
 *-or*`n
 *find-module -name $ModuleName -repository solget*`n
