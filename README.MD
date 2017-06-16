@@ -86,8 +86,11 @@ RELATED LINKS
 
 ### Detailed folder structure###
 +---build
-\---cOutput
-    \---Public
++---cOutput
+|   \---Public
+\---tests
+    +---integration
+    \---unit
 
 
 ### Contributing ###
