@@ -98,4 +98,4 @@ RELATED LINKS
 *Solvinity Customer Engineering*
 
 ### Links ###
-**[Git cOutput Repo](ssh://solvinity@solvinity.visualstudio.com:22/DefaultCollection/_git/cOutput)**
+**[Git cOutput Repo]()**
