@@ -70,7 +70,7 @@ else {
 try {
     New-ModuleManifest  -Path ..\$ModuleName\$ModuleName.psd1 -NestedModules $ModuleFile.name -Author (whoami) -RootModule "$ModuleName.psm1" `
         -CompanyName Solvinity -Copyright © -ModuleVersion $ModuleManifestVersionNumber -Description 'Help module for daily maintenance' `
-        -FunctionsToExport $TrimmedFunctionNames -CmdletsToExport '' -AliasesToExport '' -Verbose
+        -FunctionsToExport $TrimmedFunctionNames -CmdletsToExport @() -AliasesToExport '' -Verbose
 }
 catch {
     Write-Error -Message "$env:COMPUTERNAME : Failed to render a manifest"
