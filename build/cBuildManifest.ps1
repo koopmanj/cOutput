@@ -57,7 +57,7 @@ if (Test-Path ..\$ModuleName\$ModuleName.psd1) {
     $ManifestContent = Get-Content ..\$ModuleName\$ModuleName.psd1
     $ModuleManifestVersion = $ManifestContent | Select-String -Pattern 'ModuleVersion'
     [version]$ModuleManifestVersionNumber = $ModuleManifestVersion -ireplace "[A-Za-z =']", ''
-    [version]$ModuleManifestVersionNumber = "$($ModuleManifestVersionNumber.Major).$($ModuleManifestVersionNumber.Minor).$($ModuleManifestVersionNumber.Build).$($ModuleManifestVersionNumber.Revision+1)"
+    [version]$ModuleManifestVersionNumber = "$($ModuleManifestVersionNumber.Major).$($ModuleManifestVersionNumber.Minor).$($ModuleManifestVersionNumber.Build+1)"
     Write-Verbose -Message "$env:COMPUTERNAME : Build number  : $ModuleManifestVersionNumber"
     
 
